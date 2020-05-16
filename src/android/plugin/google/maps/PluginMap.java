@@ -729,7 +729,7 @@ public class PluginMap extends MyPlugin implements OnMarkerClickListener,
             callbackContext.success();
             return;
         }
-          
+
         RectF drawRect = mapCtrl.mPluginLayout.HTMLNodeRectFs.get(mapDivId);
 
         //Log.d(TAG, "--->mapDivId = " + mapDivId + ", drawRect = " + drawRect);
@@ -1748,6 +1748,26 @@ public class PluginMap extends MyPlugin implements OnMarkerClickListener,
       @Override
       public void run() {
         myMoveCamera(CameraUpdateFactory.zoomTo(zoom), callbackContext);
+      }
+    });
+  }
+
+
+  /**
+   * Stop camera animation
+   * @param args
+   * @param callbackContext
+   * @throws JSONException
+   */
+  public void stopAnimation(JSONArray args, final CallbackContext callbackContext) throws JSONException {
+
+    this.activity.runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        if(map != null) {
+          map.stopAnimation();
+        }
+        callbackContext.success();
       }
     });
   }
