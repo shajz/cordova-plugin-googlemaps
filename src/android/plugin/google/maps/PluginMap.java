@@ -3180,10 +3180,25 @@ public class PluginMap extends MyPlugin implements OnMarkerClickListener,
     }
   }
 
+  public void setClickablePOI(JSONArray args, final CallbackContext callbackContext)  throws JSONException {
+    final boolean clickable = args.getBoolean(0);
+    activity.runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        if (clickable) {
+          map.setOnPoiClickListener(PluginMap.this);
+        } else {
+          map.setOnPoiClickListener(null);
+        }
+        
+        callbackContext.success();
+      }
+    });
+  }
+
   private double calcDistance(LatLng l1, LatLng l2) {
     Point p1 = projection.toScreenLocation(l1);
     Point p2 = projection.toScreenLocation(l2);
     return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
   }
-
 }
