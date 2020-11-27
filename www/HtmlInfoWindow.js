@@ -81,7 +81,6 @@ var HTMLInfoWindow = function () {
 
   var contentBox = document.createElement('div');
   contentBox.style.display = 'inline-block';
-  contentBox.style.padding = '5px';
   contentBox.style.boxSizing = 'content-box';
   contentBox.classList.add('pgm-html-info-content-box');
 
@@ -206,7 +205,6 @@ var HTMLInfoWindow = function () {
     contentBox.style.minHeight = '50px';
     contentBox.style.width = 'auto';
     contentBox.style.height = 'auto';
-    contentBox.style.padding = '5px';
 
     var content = self.get('content');
     if (typeof content === 'string') {
@@ -236,7 +234,7 @@ var HTMLInfoWindow = function () {
     }
 
     // Adjust the HTMLInfoWindow size
-    var contentsWidth = contentBox.offsetWidth + 10; // padding 5px x 2
+    var contentsWidth = contentBox.offsetWidth;
     var contentsHeight = contentBox.offsetHeight;
     self.set('contentsHeight', contentsHeight);
     contentFrame.style.width = contentsWidth + 'px';
@@ -249,7 +247,6 @@ var HTMLInfoWindow = function () {
     }
     contentBox.style.width = '100%';
     contentBox.style.height = '100%';
-    contentBox.style.padding = '5px 17px 17px 5px';
     self.set('contentsWidth', contentsWidth);
 
     var infoOffset = {
