@@ -29,7 +29,16 @@
   {
       NSString *identifier = [NSLocale localeIdentifierFromComponents: [NSDictionary dictionaryWithObject: countryCode forKey: NSLocaleCountryCode]];
       NSString *country = [[[NSLocale alloc] initWithLocaleIdentifier:currentLanguage] displayNameForKey: NSLocaleIdentifier value: identifier];
-      [countries addObject: country];
+      if (country != nil) {
+          [countries addObject: country];
+      } else {
+          NSString *countryFallback = [[[NSLocale alloc] initWithLocaleIdentifier:@"en-US"] displayNameForKey: NSLocaleIdentifier value: identifier];
+          if (countryFallback != nil) {
+              [countries addObject: countryFallback];
+          } else {
+              [countries addObject: countryCode];
+          }
+      }
   }
 
   self.codeForCountryDictionary = [[NSDictionary alloc] initWithObjects:countryCodes forKeys:countries];
